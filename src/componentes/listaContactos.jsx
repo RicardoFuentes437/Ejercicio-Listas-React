@@ -25,6 +25,17 @@ const ListaContactos = () => {
         setContactos(temContactos);
     }
 
+    function actualizarEstado(contacto){
+        console.log('Actualizando contacto:', contacto);
+        const index = contactos.indexOf(contacto);
+        const tempContactos = [...contactos];
+        tempContactos[index].conectado = !tempContactos[index].conectado;
+        // We update the state of the component with the new list of tasks and it will update the
+        // Iteration of the tasks in order to show the task updated
+        setContactos(tempContactos);
+    }
+
+
     const Lista = () => {
         return (
             <ul>
@@ -35,6 +46,7 @@ const ListaContactos = () => {
                             contacto={contacto}
                             crear={crearContacto}
                             eliminar={eliminarContacto}
+                            actualizar={actualizarEstado}
                             >
                             </ContactoComponent>
                         )

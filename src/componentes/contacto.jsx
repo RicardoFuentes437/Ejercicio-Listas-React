@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Contacto } from '../models/contacto.class';
-import { Trash } from 'react-bootstrap-icons';
+import { Power, Trash } from 'react-bootstrap-icons';
 
 import '../styles/contacto/contactoStyle.scss'
 
-const ContactoComponent = ({ contacto, eliminar }) => {
+const ContactoComponent = ({ contacto, eliminar, actualizar }) => {
 
     useEffect(() => {
         console.log('Created Contact')
@@ -18,13 +18,16 @@ const ContactoComponent = ({ contacto, eliminar }) => {
         let status = '';
         let style = '';
 
-        if(conectado == 'true'){
+        if(conectado == true){
             status = 'En Linea';
             style = "green";
-        }else{
+        }else if(conectado == false){
             status = 'Fuera de Linea';
             style = "red";
+        }else{
+            console.log('error');
         }
+
         return (
             <span style={{color: style, fontWeight: "bold" }}>{status}</span>
         );
@@ -32,7 +35,7 @@ const ContactoComponent = ({ contacto, eliminar }) => {
 
     return (
         <li>
-            <p style={{fontWeight: "bold"}}>{contacto.nombre} {contacto.apellido} ({ estado(contacto.conectado) }) <Trash onClick={() => eliminar(contacto)} className='eliminar-contacto'></Trash></p>
+            <p style={{fontWeight: "bold"}}>{contacto.nombre} {contacto.apellido} ({ estado(contacto.conectado) }) <Power onClick={() => actualizar(contacto)} className='icono'></Power> <Trash onClick={() => eliminar(contacto)} className='icono'></Trash></p>
         </li>
     );
 
@@ -40,7 +43,9 @@ const ContactoComponent = ({ contacto, eliminar }) => {
 
 
 ContactoComponent.propTypes = {
-    contacto: PropTypes.instanceOf(Contacto)
+    contacto: PropTypes.instanceOf(Contacto).isRequired,
+    eliminar: PropTypes.func.isRequired,
+    actualizar: PropTypes.func.isRequired
 };
 
 
