@@ -18,10 +18,10 @@ const ContactoComponent = ({ contacto, eliminar, actualizar }) => {
         let status = '';
         let style = '';
 
-        if(conectado == true){
+        if(conectado === true || conectado === 'true'){
             status = 'En Linea';
             style = "green";
-        }else if(conectado == false){
+        }else if(conectado === false || conectado === 'false'){
             status = 'Fuera de Linea';
             style = "red";
         }else{
